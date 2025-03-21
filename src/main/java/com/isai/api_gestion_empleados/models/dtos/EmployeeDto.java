@@ -28,7 +28,7 @@ public class EmployeeDto {
 
     private String cargo;
 
-    private Employee boos;
+    private Employee boss;
 
     private Departament departament;
 }
