@@ -2,6 +2,9 @@ package com.isai.api_gestion_empleados.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,12 +15,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
 @Builder
+@ToString(exclude = "employees")
 public class Departament {
 
     @Id
@@ -33,6 +38,8 @@ public class Departament {
     @Column(length = 12)
     private String codeDirector;
 
-    @OneToMany(mappedBy = "departament", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    @OneToMany(mappedBy = "departament", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Employee> employees;
 }
